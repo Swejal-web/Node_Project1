@@ -1,7 +1,17 @@
 {
-    "extends": ["airbnb","prettier","plugin:node/recommended"],
-    "plugins": ["prettier"],
+    "parser": "@typescript-eslint/parser",
+    "extends": ["airbnb","prettier","plugin:node/recommended",
+        "plugin:@typescript-eslint/recommended"],
+    "plugins": ["prettier","@typescript-eslint"],
     "rules": {
+        
+        "node/no-unsupported-features/es-syntax": [
+            "error",
+            { "ignores": [
+                    "modules"
+                ]
+            }
+        ],
         "prettier/prettier": [
             "error",
             {
@@ -11,11 +21,14 @@
             }
            
           ],
-        "no-unused-vars":"warn",
+       // "no-unused-vars":"warn",
         "no-console":"off",
         "func-names" : "off",
         "no-process-exit" : "off",
         "object-shorthand":"off",
         "class-methods-use-this":"off"
     }
+
+    
+  
 }
