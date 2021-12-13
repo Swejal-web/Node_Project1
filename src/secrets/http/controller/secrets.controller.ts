@@ -15,11 +15,12 @@ export const postSecret = async (req: Request, res: Response) => {
     password: body.password,
     expiresIn: body.expiresIn
   });
+
   await createSecretService.execute(command);
   //   res.status(201).json({
   //     data
   //   });
-  console.log(command);
+
   const secret = await getSecret.getId(
     id,
     body.body,

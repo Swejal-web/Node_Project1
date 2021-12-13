@@ -1,17 +1,14 @@
 // eslint-disable-next-line import/prefer-default-export
 export class CreateSecret {
-  public id: string;
+  public readonly id: string;
 
-  public body: string;
+  public readonly body: string;
 
-  public password: string | null;
+  public readonly password: string | null;
 
-  public expiresIn: string;
+  public readonly expiresIn: string;
 
-  constructor({ id, body, password, expiresIn }: CreateSecret) {
-    this.id = id;
-    this.body = body;
-    this.password = password;
-    this.expiresIn = expiresIn;
+  constructor(props: CreateSecret) {
+    Object.assign(this, props);
   }
 }
