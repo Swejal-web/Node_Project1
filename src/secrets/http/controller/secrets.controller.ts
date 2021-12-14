@@ -21,14 +21,6 @@ export const postSecret = async (req: Request, res: Response) => {
   //     data
   //   });
 
-  const secret = await getSecret.getId(
-    id,
-    body.body,
-    body.password,
-    body.expiresIn
-  );
-  res.status(201).json({
-    status: 'success',
-    secret
-  });
+  const secret = await getSecret.getId(id);
+  res.status(201).json(secret);
 };
