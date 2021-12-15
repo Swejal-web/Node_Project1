@@ -17,9 +17,6 @@ export const postSecret = async (req: Request, res: Response) => {
   });
 
   await createSecretService.execute(command);
-  //   res.status(201).json({
-  //     data
-  //   });
 
   const secret = await getSecret.getId(id);
   res.status(201).json(secret);

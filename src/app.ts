@@ -11,8 +11,6 @@ dotenv.config({ path: './config.env' });
 
 const app = express();
 
-console.log(process.env.DB_HOST);
-
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));

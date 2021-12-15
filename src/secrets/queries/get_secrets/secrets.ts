@@ -4,7 +4,7 @@ export class Secret {
 
   public readonly body: string;
 
-  public readonly expiresIn: object;
+  public readonly expiresIn: string;
 
   constructor(props: Partial<Secret>) {
     Object.assign(this, props);
