@@ -1,12 +1,17 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable node/no-missing-import */
 import express, { Request, Response, NextFunction } from 'express';
+import dotenv from 'dotenv';
 
 import { secretRouter } from 'secrets/http/route';
 import { globalErrorHandler } from 'common/http/middleware/globalErrorHandler';
 import { AppError } from 'common/exception/AppError';
 
+dotenv.config({ path: './config.env' });
+
 const app = express();
+
+console.log(process.env.DB_HOST);
 
 app.use(express.json());
 
