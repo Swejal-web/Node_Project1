@@ -8,7 +8,8 @@ import { getSecret } from 'secrets/queries/get_secrets';
 // eslint-disable-next-line import/prefer-default-export
 export const postSecret = async (req: Request, res: Response) => {
   const id = uuid4();
-  const { body } = req;
+  const { body } = req; // imp {body"this is body}
+
   const command = new CreateSecret({
     id,
     body: body.body,
@@ -20,4 +21,10 @@ export const postSecret = async (req: Request, res: Response) => {
 
   const secret = await getSecret.getId(id);
   res.status(201).json(secret);
+};
+
+export const getSingleSecret = async (req: Request, res: Response) => {
+  const secret = await getSecret.getId(req.params.id);
+
+  res.status(200).json(secret);
 };

@@ -7,6 +7,7 @@ import * as secretController from 'secrets/http/controller/secrets.controller';
 const secretRouter = express.Router();
 
 secretRouter.route('/secrets').post(secretController.postSecret);
+secretRouter.route('/secrets/:id').get(secretController.getSingleSecret);
 
 // eslint-disable-next-line import/prefer-default-export
 export { secretRouter };
