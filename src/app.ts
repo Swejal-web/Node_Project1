@@ -1,12 +1,40 @@
-import express, { Application, Request, Response } from 'express';
+/* eslint-disable node/no-missing-require */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable node/no-missing-import */
+import express, { Request, Response, NextFunction } from 'express';
+import dotenv from 'dotenv';
 
-const app: Application = express();
+import { secretRouter } from 'secrets/http/route';
+import { globalErrorHandler } from 'common/http/middleware/globalErrorHandler';
+import { AppError } from 'common/exception/AppError';
 
-app.get('/', (req: Request, res: Response) => {
-  res.write('Hey there');
-  res.end();
+dotenv.config({ path: './config.env' });
+
+const app = express();
+
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
+// app.use(
+//   session({
+//     secret: 'keyboard cat',
+//     resave: true,
+//     saveUninitialized: true
+//   })
+// );
+
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// app.use(flash());
+
+app.use(secretRouter);
+
+app.all('*', (req: Request, res: Response, next: NextFunction) => {
+  next(new AppError(`Cannot connect to ${req.originalUrl}.Try again`, 404));
 });
 
-app.listen(3000, () => {
-  console.log('Connected to port 3000');
-});
+app.use(globalErrorHandler);
+
+export default app;
