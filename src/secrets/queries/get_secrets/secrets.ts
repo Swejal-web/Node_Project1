@@ -4,6 +4,8 @@ export class Secret {
 
   public readonly body: string;
 
+  public readonly password: string;
+
   public readonly expiresIn: string;
 
   constructor(props: Partial<Secret>) {

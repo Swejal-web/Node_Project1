@@ -10,6 +10,7 @@ export class GetSecretQuery {
     return new Secret({
       id: secrets.id,
       body: secrets.body,
+      password: secrets.password,
       expiresIn: secrets.expiresIn
     });
   }

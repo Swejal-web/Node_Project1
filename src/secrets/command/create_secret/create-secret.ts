@@ -4,7 +4,7 @@ export class CreateSecret {
 
   public readonly body: string;
 
-  public readonly password: string;
+  public readonly password: string | null;
 
   public readonly expiresIn: string;
 
