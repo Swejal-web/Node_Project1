@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-import-module-exports
-import dotenv, { config } from 'dotenv';
+import dotenv from 'dotenv';
 
 dotenv.config({ path: './config.env' });
 

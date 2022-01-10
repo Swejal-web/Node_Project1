@@ -1,13 +1,11 @@
-/* eslint-disable node/no-missing-import */
-/* eslint-disable import/no-unresolved */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-constructor */
 import { Express } from 'express';
 import { Knex } from 'knex';
 import app from 'app';
 import { db } from 'database';
 
-// eslint-disable-next-line import/prefer-default-export
 export class AppFactory {
-  // eslint-disable-next-line no-useless-constructor
   private constructor(public instance: Express, public knex: Knex) {}
 
   static async new(): Promise<AppFactory> {

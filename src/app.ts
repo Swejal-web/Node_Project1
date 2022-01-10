@@ -10,8 +10,6 @@ dotenv.config({ path: './config.env' });
 
 const app = express();
 
-const hello = 'swejal';
-
 app.use(cors());
 
 app.use(express.json());
@@ -20,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', secretRouter);
 
-app.all('*', (req: Request, res: Response, next: NextFunction) => {
+app.all('*', (req: Request, _res: Response, next: NextFunction) => {
   next(new AppError(`Cannot connect to ${req.originalUrl}.Try again`, 404));
 });
 

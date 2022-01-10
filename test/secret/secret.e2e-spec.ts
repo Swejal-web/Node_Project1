@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 /* eslint-disable import/extensions */
-/* eslint-disable node/no-missing-import */
+/* eslint-disable import/namespace */
 
 // eslint-disable-next-line node/no-unpublished-import
 import request from 'supertest';
@@ -48,12 +49,11 @@ describe('Secret e2e', () => {
       id,
       body: 'secret body goes here',
       password: 'secret',
-      expiresIn: '03:02:01'
+      expiresIn: '03:02:01',
+      expiresAt: '03:04:02'
     });
 
-    const { body } = await request(app.instance)
-      .get(`/secrets/${id}`)
-      .expect(200);
+    await request(app.instance).get(`/secrets/${id}`).expect(200);
   });
 
   afterAll(async () => {
