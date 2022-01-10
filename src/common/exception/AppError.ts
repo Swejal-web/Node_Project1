@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export class AppError extends Error {
   public statusCode: number;
 

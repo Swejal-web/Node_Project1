@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export class Secret {
   public readonly id: string;
 
@@ -6,7 +5,9 @@ export class Secret {
 
   public readonly password: string;
 
-  public readonly expiresIn: string;
+  public readonly expiresIn: object;
+
+  public readonly expiresAt: string;
 
   constructor(props: Partial<Secret>) {
     Object.assign(this, props);

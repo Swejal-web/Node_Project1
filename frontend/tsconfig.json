@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [ "./*"],
+     "styles/*":["./styles/*"],
+     "components/*":["./components/*"],
+     "layout/*":["./layout/*"],
+     "pages/*":["./pages/*"]
+    },
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths"
+      }
+    ],
+    "allowJs": false
+  },
+  "include": [
+    "next-env.d.ts",
+    "global.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+, "pages/private/[id].js", "tailwind.config.js", "postcss.config.js"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

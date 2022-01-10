@@ -1,15 +1,14 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable node/no-missing-import */
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextFunction, Request, Response } from 'express';
 
 import { AppError } from 'common/exception/AppError';
 
-// eslint-disable-next-line import/prefer-default-export
 export const globalErrorHandler = (
   err: AppError,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   res.status(err.statusCode).json({
     status: err.status,

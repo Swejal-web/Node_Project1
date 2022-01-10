@@ -1,6 +1,5 @@
 import * as bcrypt from 'bcrypt';
 
-// eslint-disable-next-line import/prefer-default-export
 export class BcryptService {
   private readonly SALT_ROUNDS = 5;
 

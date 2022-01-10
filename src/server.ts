@@ -1,6 +1,3 @@
-/* eslint-disable import/no-unresolved */
-/* eslint-disable node/no-missing-import */
-
 import app from 'app';
 
 import appConfig from 'config/App.Config';

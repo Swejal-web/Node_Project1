@@ -1,17 +1,16 @@
 /* eslint-disable consistent-return */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable node/no-missing-import */
+
 import { Request, Response, NextFunction } from 'express';
 import { v4 as uuid4 } from 'uuid';
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+
 import { CreateSecret } from 'secrets/command/create_secret/create-secret';
 import { createSecretService } from 'secrets/command/create_secret';
+import { createExpiration } from 'secrets/exceptions';
 import { getSecret } from 'secrets/queries/get_secrets';
 import { AppError } from 'common/exception/AppError';
 import { bcryptService } from 'common/services';
-import { nextTick } from 'process';
-// eslint-disable-next-line import/prefer-default-export
+
 dotenv.config({ path: './config.env' });
 
 export const postSecret = async (req: Request, res: Response, next) => {
@@ -19,47 +18,47 @@ export const postSecret = async (req: Request, res: Response, next) => {
   const { body } = req; // imp {body"this is body}
 
   if (!body.body) {
-    return next(new AppError('Body is required', 400));
+    return next(new AppError('Secret is required', 400));
   }
 
   const command = new CreateSecret({
     id,
     body: body.body,
     password: body.password,
-    expiresIn: body.expiresIn
+    expiresIn: body.expiresIn,
+    expiresAt: createExpiration.makeExpiration(body.expiresIn)
   });
 
   await createSecretService.execute(command);
 
-  const payload = {
-    secret: {
-      id
-    }
-  };
-
-  const token = jwt.sign(payload, process.env.jwt_Secret, {
-    expiresIn: body.expiresIn
-  });
-
   const secret = await getSecret.getId(id);
-  res.status(201).json({ token, secret });
+  res.status(201).json({ secret });
 };
 
-export const getSingleSecret = async (req: Request, res: Response) => {
-  // const id: string = req.secretId?.id;
-  // console.log(id);
-  const tokenid = req.params.tokenId;
+export const getSingleSecret = async (req: Request, res: Response, next) => {
   try {
-    const decoded = jwt.verify(tokenid, process.env.jwt_SECRET);
-    const secret = await getSecret.getId(decoded.secret.id);
-    if (!secret.password) {
-      return res.status(200).json({ secret: secret.body });
+    const secret = await getSecret.getId(req.params.id);
+
+    const expireDate = new Date(secret.expiresAt);
+
+    if (new Date().getTime() > expireDate.getTime()) {
+      return next(new AppError('The secret is expired', 401));
     }
-    res
-      .status(200)
-      .json({ secret: 'This message is encrypted with your password' });
+
+    if (!secret.password) {
+      return res.status(200).json({
+        secId: secret.id,
+        secretBody: secret.body,
+        secretPassword: secret.password
+      });
+    }
+    res.status(200).json({
+      secId: secret.id,
+      secretBody: 'This message is encrypted with your password',
+      secretPassword: secret.password
+    });
   } catch (err) {
-    res.status(200).json({ err: 'token is not valid' });
+    res.status(400).json({ err: 'token is not valid' });
   }
 };
 
@@ -68,12 +67,8 @@ export const getProtectedSingleSecret = async (
   res: Response,
   next: NextFunction
 ) => {
-  // const id: string = req.secretId?.id;
-  // console.log(id);
-  const tokenid = req.params.tokenId;
   try {
-    const decoded = jwt.verify(tokenid, process.env.jwt_SECRET);
-    const secret = await getSecret.getId(decoded.secret.id);
+    const secret = await getSecret.getId(req.params.id);
 
     if (!secret.password) {
       return res.status(200).json({ secret: secret.body });
