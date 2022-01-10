@@ -67,6 +67,6 @@
     "typescript-transform-paths": "^3.3.1"
   },
   "lint-staged": {
-    "*.{ts,tsx}": ["eslint . --ext ts --ext tsx","prettier --check","eslint --cache --fix","prettier --write"]
+    "*.{ts,tsx}": ["eslint . --ext ts --ext tsx","prettier --check","eslint --cache --fix","prettier --write"," tsc --pretty --noEmit"]
   }
 }
