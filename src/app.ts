@@ -10,6 +10,8 @@ dotenv.config({ path: './config.env' });
 
 const app = express();
 
+const hello = 'swejal';
+
 app.use(cors());
 
 app.use(express.json());
