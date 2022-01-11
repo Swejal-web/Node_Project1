@@ -7,7 +7,7 @@ export async function up(knex: Knex): Promise<void> {
     table.string('password').nullable();
     table.specificType('expiresIn', 'INTERVAL');
     table.timestamp('created_at').defaultTo(knex.fn.now());
-    table.timestamp('updated_at').defaultTo(knex.fn.now());
+    table.string('expires_at');
   });
 }
 

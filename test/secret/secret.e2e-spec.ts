@@ -4,11 +4,8 @@
 
 // eslint-disable-next-line node/no-unpublished-import
 import request from 'supertest';
-import { v4 as uuid4 } from 'uuid';
 // eslint-disable-next-line import/no-unresolved
 import { AppFactory } from '../factory/app';
-// eslint-disable-next-line import/no-unresolved
-import { createSecret } from '../factory/secret';
 
 describe('Secret e2e', () => {
   let app: AppFactory;
@@ -23,11 +20,11 @@ describe('Secret e2e', () => {
 
   it('POST/ secrets create a new secret', async () => {
     const { body } = await request(app.instance)
-      .post('/secrets')
+      .post('/api/secrets')
       .send({
         body: 'secret body goes here',
         password: 'secret',
-        expiresIn: '03:02:01'
+        expiresIn: '1 day'
       })
       .expect(201);
 
@@ -35,26 +32,26 @@ describe('Secret e2e', () => {
       expect.objectContaining({
         body: 'secret body goes here',
         expiresIn: expect.objectContaining({
-          hours: 3,
-          minutes: 2,
-          seconds: 1
+          day: 1
         })
       })
     );
   });
 
-  it('GET/secrets/:id should fetch entry', async () => {
-    const id = uuid4();
-    await createSecret({
-      id,
-      body: 'secret body goes here',
-      password: 'secret',
-      expiresIn: '03:02:01',
-      expiresAt: '03:04:02'
-    });
+  // it('GET/secrets/:id should fetch entry', async () => {
+  //   const id = uuid4();
+  //   await createSecret({
+  //     id:'d01c1cd6-ea09-479a-acdd-2ebab1992bdd',
+  //     body: 'secret body goes here',
+  //     password: 'secret',
+  //     expiresIn: '7 days',
+  //     expiresAt: '2022-01-11 06:52:36 +0000'
+  //   });
 
-    await request(app.instance).get(`/secrets/${id}`).expect(200);
-  });
+  //   await request(app.instance)
+  //     .get(`/private/d01c1cd6-ea09-479a-acdd-2ebab1992bdd`)
+  //     .expect(200);
+  // });
 
   afterAll(async () => {
     await app.close();
