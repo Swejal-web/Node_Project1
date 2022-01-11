@@ -27,10 +27,9 @@ export const postSecret = async (secrets: secretValue): Promise<Isecret> => {
         'Content-Type': 'application/json'
       }
     });
-    console.log(response.data.secret);
+
     return response.data.secret;
   } catch (err: any) {
-    console.log(err.response);
     return Promise.reject(err.response.data.message);
   }
 };
@@ -42,7 +41,7 @@ export const getSecret = async (id: string) => {
         'Content-Type': 'application/json'
       }
     });
-    console.log(data);
+
     return data;
   } catch (err: any) {
     return err.response.data;

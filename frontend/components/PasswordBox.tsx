@@ -25,8 +25,6 @@ export default function PasswordBox({ formSubmit }: IProps) {
     resolver: yupResolver(schema)
   });
 
-  console.log(errors);
-
   // ************ Used React-hook-form  ******************* //
 
   return (

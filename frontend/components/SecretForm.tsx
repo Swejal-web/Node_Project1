@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 
 import ErrorBox from './ErrorBox';
 import { ErrorContext } from '@/contextProvider/notificationProvider';
-import useStore from '@/zustandStore/store';
+// import useStore from '@/zustandStore/store';
 
 import * as api from '@/pages/api/secretsApi';
 
@@ -28,7 +28,7 @@ export default function SecretForm() {
 
   const { showError } = useContext(ErrorContext); // Context Api Used for Error Handling
 
-  const addSecret = useStore((state) => state.addSecret); // this is the hooks from zustandStore
+  // const addSecret = useStore((state) => state.addSecret); // this is the hooks from zustandStore
 
   const {
     register,
@@ -43,7 +43,6 @@ export default function SecretForm() {
   const { mutate } = useMutation(api.postSecret, {
     // here, data is the response for the post Api Call
     onSuccess: (data: Isecret) => {
-      addSecret(data);
       router.push({
         pathname: `/private/${data.id}`
       });
@@ -89,6 +88,7 @@ export default function SecretForm() {
             <input
               className="container max-w-md bg-gray-100 rounded-md h-8 border-2 mx-2"
               type="text"
+              autoComplete="off"
               id="passphrase"
               {...register('passphrase')}
             />

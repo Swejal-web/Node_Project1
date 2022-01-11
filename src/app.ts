@@ -13,7 +13,7 @@ dotenv.config({ path: './config.env' });
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet()); // Security HTTP headers
 
 app.use(cors());
 
@@ -26,13 +26,13 @@ const passwordLimiter = rateLimit({
   }
 });
 
-app.use('/api/secret/:id', passwordLimiter);
+app.use('/api/secret/:id', passwordLimiter); // limit request from the same IP
 
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(xss());
+app.use(xss()); // prevents attack in the form of malacious html code
 
 app.use('/api', secretRouter);
 

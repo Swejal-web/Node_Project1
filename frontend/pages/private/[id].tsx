@@ -16,7 +16,7 @@ export default function PrivateId({ id }: IProps) {
   if (isLoading) {
     return <p className="text-3xl font-bold mt-10 my-5">Loading....</p>;
   }
-  console.log(secret);
+
   return (
     <>
       <h1 className="text-black text-2xl font-medium">Share This Link:</h1>
