@@ -9,16 +9,8 @@ interface IProps {
   mutate: UseMutateFunction<any, unknown, Ipass, unknown>;
 }
 
-export interface Isecret {
-  body: string;
-  expiresAt: string;
-  expiresIn: object;
-  password: string | null;
-  id: string;
-}
-
 export default function ViewBox({ setIsSubmitted, mutate, secId }: IProps) {
-  // ************** This is the component for secret with no password ***************** //
+  // ************** This is the component for secret with no password ***************** /
   // ********** PasswordBox.ts contains the components to be rendered for secrets with password ********* //
 
   return (

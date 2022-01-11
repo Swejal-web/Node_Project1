@@ -1,8 +1,8 @@
 /* eslint-disable consistent-return */
 
+import dotenv from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
 import { v4 as uuid4 } from 'uuid';
-import dotenv from 'dotenv';
 
 import { CreateSecret } from 'secrets/command/create_secret/create-secret';
 import { createSecretService } from 'secrets/command/create_secret';
@@ -15,7 +15,7 @@ dotenv.config({ path: './config.env' });
 
 export const postSecret = async (req: Request, res: Response, next) => {
   const id = uuid4();
-  const { body } = req; // imp {body"this is body}
+  const { body } = req;
 
   if (!body.body) {
     return next(new AppError('Secret is required', 400));
