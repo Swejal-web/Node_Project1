@@ -22,7 +22,9 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-rate-limit": "^6.0.5",
     "express-session": "^1.17.2",
+    "helmet": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.14",
     "passport": "^0.5.2",
@@ -30,7 +32,8 @@
     "password": "^0.1.1",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "xss-clean": "^0.1.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -71,7 +74,6 @@
       "eslint . --ext ts --ext tsx",
       "eslint --cache --fix",
       "prettier --write"
-     
     ]
   }
 }

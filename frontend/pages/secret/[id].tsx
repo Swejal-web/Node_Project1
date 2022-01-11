@@ -7,6 +7,7 @@ import PasswordBox from '@/components/PasswordBox';
 import ViewBox from '@/components/ViewBox';
 import { ErrorContext } from '@/contextProvider/notificationProvider';
 import * as api from '@/pages/api/secretsApi';
+import useStore from '@/zustandStore/store';
 
 export interface iPassword {
   passphrase: string;
@@ -26,11 +27,11 @@ interface IProps {
 export default function SecretId({ secretData }: IProps) {
   // *************** This is the shared link secret Page **************** //
 
-  console.log(secretData);
-
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const { showError } = useContext(ErrorContext);
+
+  const { errorData }: any = useStore((state) => state.error);
 
   if (secretData.message) {
     showError({ message: secretData.message });
@@ -63,8 +64,9 @@ export default function SecretId({ secretData }: IProps) {
   };
 
   return (
-    <div>
-      {secretData.message ? (
+    <>
+      {secretData.message ||
+      (errorData && errorData.message === 'Try again after one hour') ? (
         <ErrorBox errors={undefined} />
       ) : secretPassword ? (
         isSubmitted ? (
@@ -81,7 +83,7 @@ export default function SecretId({ secretData }: IProps) {
           secId={secId}
         />
       )}
-    </div>
+    </>
   );
 }
 
