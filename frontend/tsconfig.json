@@ -19,13 +19,7 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": [ "./*"],
-     "styles/*":["./styles/*"],
-     "components/*":["./components/*"],
-     "layout/*":["./layout/*"],
-     "pages/*":["./pages/*"]
-    },
+    
     "plugins": [
       {
         "transform": "typescript-transform-paths"

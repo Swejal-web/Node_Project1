@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 
-import ErrorBox from './ErrorBox';
+import ErrorBox from 'components/ErrorBox';
 import { ErrorContext } from '@/contextProvider/notificationProvider';
 // import useStore from '@/zustandStore/store';
 
@@ -62,7 +62,7 @@ export default function SecretForm() {
   return (
     <>
       <div className="mt-4">
-        <ErrorBox errors={errors.secret} />
+        <ErrorBox />
       </div>
       <form
         className="container mx-auto flex-col"

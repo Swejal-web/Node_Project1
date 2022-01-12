@@ -17,17 +17,6 @@ app.use(helmet()); // Security HTTP headers
 
 app.use(cors());
 
-const passwordLimiter = rateLimit({
-  max: 5,
-  windowMs: 60 * 60 * 1000,
-  message: {
-    status: 'failed',
-    message: 'Try again after one hour'
-  }
-});
-
-app.use('/api/secret/:id', passwordLimiter); // limit request from the same IP
-
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));

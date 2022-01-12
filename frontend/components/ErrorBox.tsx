@@ -13,7 +13,7 @@ interface IProps2 {
   errorData?: IError;
 }
 
-export default function ErrorBox({ errors }: IProps) {
+export default function ErrorBox() {
   // the errors passed as props are the error from the frontend
 
   const [errorSign, setErrorSign] = useState(true); // to remove the error alert sign
@@ -24,12 +24,12 @@ export default function ErrorBox({ errors }: IProps) {
 
   return (
     <div>
-      {errors && errorSign ? (
+      {errorData && errorSign && (
         <div
           className="container max-w-2xl mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded "
           role="alert"
         >
-          <strong className="font-bold">{errors.message} </strong>
+          <strong className="font-bold">{errorData.message} </strong>
 
           <button
             type="button"
@@ -39,24 +39,6 @@ export default function ErrorBox({ errors }: IProps) {
             <span>X</span>
           </button>
         </div>
-      ) : (
-        errorData &&
-        errorSign && (
-          <div
-            className="container max-w-2xl mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded "
-            role="alert"
-          >
-            <strong className="font-bold">{errorData.message} </strong>
-
-            <button
-              type="button"
-              className="ml-80"
-              onClick={() => setErrorSign(false)}
-            >
-              <span>X</span>
-            </button>
-          </div>
-        )
       )}
     </div>
   );

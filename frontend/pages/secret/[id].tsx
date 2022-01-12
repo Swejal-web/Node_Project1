@@ -1,13 +1,11 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useMutation } from 'react-query';
 
-import MessageBox from 'components/MessageBox';
 import ErrorBox from '@/components/ErrorBox';
 import PasswordBox from '@/components/PasswordBox';
 import ViewBox from '@/components/ViewBox';
 import { ErrorContext } from '@/contextProvider/notificationProvider';
 import * as api from '@/pages/api/secretsApi';
-import useStore from '@/zustandStore/store';
 
 export interface iPassword {
   passphrase: string;
@@ -27,11 +25,9 @@ interface IProps {
 export default function SecretId({ secretData }: IProps) {
   // *************** This is the shared link secret Page **************** //
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
   const { showError } = useContext(ErrorContext);
 
-  const { errorData }: any = useStore((state) => state.error);
+  // secretData.message contains the error if the id is expired
 
   if (secretData.message) {
     showError({ message: secretData.message });
@@ -43,7 +39,6 @@ export default function SecretId({ secretData }: IProps) {
 
     isLoading
   } = useMutation(api.shareSecret, {
-    onSuccess: () => setIsSubmitted(true),
     onError: (errorData: string) => {
       showError({ message: errorData });
     }
@@ -63,25 +58,16 @@ export default function SecretId({ secretData }: IProps) {
     mutate({ body: { password: passphrase, secretId: secId } });
   };
 
+  // if the id is expired just show ErrorBox else show (PasswordBox || ViewBox)
+
   return (
     <>
-      {secretData.message ||
-      (errorData && errorData.message === 'Try again after one hour') ? (
-        <ErrorBox errors={undefined} />
+      {secretData.message ? (
+        <ErrorBox />
       ) : secretPassword ? (
-        isSubmitted ? (
-          <MessageBox secret={secret} />
-        ) : (
-          <PasswordBox formSubmit={formSubmit} />
-        )
-      ) : isSubmitted ? (
-        <MessageBox secret={secret} />
+        <PasswordBox formSubmit={formSubmit} secret={secret} />
       ) : (
-        <ViewBox
-          setIsSubmitted={setIsSubmitted}
-          mutate={mutate}
-          secId={secId}
-        />
+        <ViewBox mutate={mutate} secId={secId} secret={secret} />
       )}
     </>
   );
