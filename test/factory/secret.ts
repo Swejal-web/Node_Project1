@@ -1,20 +1,35 @@
-/* eslint-disable node/no-missing-import */
-// eslint-disable-next-line import/no-unresolved
+import { bcryptService } from 'common/services';
 import { db } from 'database';
-// eslint-disable-next-line import/no-unresolved
-import { CreateSecret } from 'secrets/command/create_secret/create-secret';
 
-// eslint-disable-next-line import/prefer-default-export
+import { CreateSecret } from 'secrets/command/create_secret/create-secret';
+import { Secret } from 'secrets/queries/get_secrets/secrets';
+
 export const createSecret = async ({
   id,
   body,
   password,
-  expiresIn
+  expiresIn,
+  expiresAt
 }: CreateSecret) => {
-  await db('secrets').insert({
-    id,
-    body,
-    password,
-    expiresIn
-  });
+  if (password) {
+    await db('secrets').insert({
+      id,
+      body,
+      password: await bcryptService.hash(password),
+      expiresIn,
+      expires_at: expiresAt
+    });
+  } else {
+    await db('secrets').insert({
+      id,
+      body,
+      expiresIn,
+      expires_at: expiresAt
+    });
+  }
+};
+
+export const getSecret = async (id): Promise<Secret> => {
+  const secrets = await db('secrets').where({ id }).first();
+  return secrets;
 };

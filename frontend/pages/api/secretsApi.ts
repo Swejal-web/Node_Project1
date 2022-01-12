@@ -20,6 +20,7 @@ export interface Ipass {
   body: IBody;
 }
 
+// for creating a secret
 export const postSecret = async (secrets: secretValue): Promise<Isecret> => {
   try {
     const response = await api.post('/secrets', secrets, {
@@ -34,6 +35,7 @@ export const postSecret = async (secrets: secretValue): Promise<Isecret> => {
   }
 };
 
+// for fetching secret by id
 export const getSecret = async (id: string) => {
   try {
     const { data } = await api.get(`/private/${id}`, {
@@ -48,6 +50,7 @@ export const getSecret = async (id: string) => {
   }
 };
 
+// check for password and show the secret
 export const shareSecret = async (body: Ipass) => {
   try {
     const { data } = await api.post(

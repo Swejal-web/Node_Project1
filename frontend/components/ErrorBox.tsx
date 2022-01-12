@@ -14,9 +14,11 @@ interface IProps2 {
 }
 
 export default function ErrorBox({ errors }: IProps) {
-  const [errorSign, setErrorSign] = useState(true);
+  // the errors passed as props are the error from the frontend
 
-  const { errorData }: IProps2 = useStore((state) => state.error);
+  const [errorSign, setErrorSign] = useState(true); // to remove the error alert sign
+
+  const { errorData }: IProps2 = useStore((state) => state.error); //called from zustand store to pass the errors
 
   // *************** errors are the client side error whereas errorData are the server side errors ****************** //
 

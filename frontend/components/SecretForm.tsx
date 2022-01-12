@@ -28,8 +28,6 @@ export default function SecretForm() {
 
   const { showError } = useContext(ErrorContext); // Context Api Used for Error Handling
 
-  // const addSecret = useStore((state) => state.addSecret); // this is the hooks from zustandStore
-
   const {
     register,
     handleSubmit,

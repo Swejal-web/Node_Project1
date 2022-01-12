@@ -13,6 +13,7 @@ import { bcryptService } from 'common/services';
 
 dotenv.config({ path: './config.env' });
 
+// for posting the secret
 export const postSecret = async (req: Request, res: Response, next) => {
   const id = uuid4();
   const { body } = req;
@@ -35,6 +36,7 @@ export const postSecret = async (req: Request, res: Response, next) => {
   res.status(201).json({ secret });
 };
 
+// for fetching the secret
 export const getSingleSecret = async (req: Request, res: Response, next) => {
   try {
     const secret = await getSecret.getId(req.params.id);
@@ -62,6 +64,7 @@ export const getSingleSecret = async (req: Request, res: Response, next) => {
   }
 };
 
+// for checking if password exists and showing the secret
 export const getProtectedSingleSecret = async (
   req: Request,
   res: Response,
