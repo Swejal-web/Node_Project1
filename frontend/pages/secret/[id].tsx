@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 import { useMutation } from 'react-query';
 
-import ErrorBox from '@/components/ErrorBox';
-import PasswordBox from '@/components/PasswordBox';
-import ViewBox from '@/components/ViewBox';
-import { ErrorContext } from '@/contextProvider/notificationProvider';
-import * as api from '@/pages/api/secretsApi';
+import ErrorBox from 'components/ErrorBox';
+import PasswordBox from 'components/PasswordBox';
+import ViewBox from 'components/ViewBox';
+import { ErrorContext } from 'contextProvider/notificationProvider';
+import * as api from 'pages/api/secretsApi';
 
 export interface iPassword {
   passphrase: string;

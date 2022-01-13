@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Isecret } from '@/components/SecretForm';
+import { Isecret } from 'components/SecretForm';
 
 const api = axios.create({
   baseURL: 'http://localhost:3000/api'

@@ -1,7 +1,7 @@
 import create from 'zustand';
 import { devtools } from 'zustand/middleware';
-import { Isecret } from '@/components/SecretForm';
-import { IError } from '@/components/ErrorBox';
+import { Isecret } from 'components/SecretForm';
+import { IError } from 'components/ErrorBox';
 
 const store = (set: any) => ({
   secret: {},

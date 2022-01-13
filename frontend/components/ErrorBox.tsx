@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useStore from '@/zustandStore/store';
+import useStore from 'zustandStore/store';
 
 export interface IError {
   message: string;

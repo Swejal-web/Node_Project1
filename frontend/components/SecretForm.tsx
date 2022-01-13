@@ -4,10 +4,10 @@ import { useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 
 import ErrorBox from 'components/ErrorBox';
-import { ErrorContext } from '@/contextProvider/notificationProvider';
+import { ErrorContext } from 'contextProvider/notificationProvider';
 // import useStore from '@/zustandStore/store';
 
-import * as api from '@/pages/api/secretsApi';
+import * as api from 'pages/api/secretsApi';
 
 interface secretData {
   secret: string;

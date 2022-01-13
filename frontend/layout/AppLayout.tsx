@@ -1,5 +1,5 @@
-import { ErrorProvider } from '@/contextProvider/notificationProvider';
-import useStore from '@/zustandStore/store';
+import { ErrorProvider } from 'contextProvider/notificationProvider';
+import useStore from 'zustandStore/store';
 
 export default function AppLayout({ children }: any) {
   const addError = useStore((state) => state.addError);

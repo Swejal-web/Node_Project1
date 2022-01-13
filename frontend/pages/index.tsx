@@ -1,4 +1,4 @@
-import SecretForm from '@/components/SecretForm';
+import SecretForm from 'components/SecretForm';
 
 export default function HomePage() {
   return (

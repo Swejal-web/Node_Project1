@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import ErrorBox from 'components/ErrorBox';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { iPassword } from '@/pages/secret/[id]';
-import { ErrorContext } from '@/contextProvider/notificationProvider';
+import { iPassword } from 'pages/secret/[id]';
+import { ErrorContext } from 'contextProvider/notificationProvider';
 import MessageBox from './MessageBox';
 
 interface IProps {

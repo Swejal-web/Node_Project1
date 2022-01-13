@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-import * as api from '@/pages/api/secretsApi';
+import * as api from 'pages/api/secretsApi';
 
 interface IProps {
   id: string;

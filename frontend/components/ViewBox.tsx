@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { UseMutateFunction } from 'react-query';
-import ErrorBox from '@/components/ErrorBox';
-import { Ipass } from '@/pages/api/secretsApi';
+import ErrorBox from 'components/ErrorBox';
+import { Ipass } from 'pages/api/secretsApi';
 import MessageBox from './MessageBox';
 
 interface IProps {
