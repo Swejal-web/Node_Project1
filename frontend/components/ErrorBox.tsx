@@ -5,10 +5,6 @@ export interface IError {
   message: string;
 }
 
-interface IProps {
-  errors: IError | undefined;
-}
-
 interface IProps2 {
   errorData?: IError;
 }

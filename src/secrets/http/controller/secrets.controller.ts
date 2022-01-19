@@ -81,10 +81,7 @@ export const getProtectedSingleSecret = async (
     if (!password) {
       return next(new AppError('Please enter  password', 400));
     }
-    if (
-      !secret ||
-      !(await bcryptService.correctPassword(password, secret.password))
-    ) {
+    if (!(await bcryptService.correctPassword(password, secret.password))) {
       return next(new AppError(' password not matched', 401));
     }
     res.status(201).json({ secret: secret.body });

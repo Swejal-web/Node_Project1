@@ -4,8 +4,8 @@ import * as yup from 'yup';
 import ErrorBox from 'components/ErrorBox';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { iPassword } from 'pages/secret/[id]';
+import MessageBox from 'components/MessageBox';
 import { ErrorContext } from 'contextProvider/notificationProvider';
-import MessageBox from './MessageBox';
 
 interface IProps {
   formSubmit: (datas: iPassword) => Promise<void>;
