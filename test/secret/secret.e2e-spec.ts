@@ -38,8 +38,9 @@ describe('Secret e2e', () => {
       id,
       body: 'secret body goes here',
       password: 'secret',
-      expiresIn: '1 days',
-      expiresAt: createExpiration.makeExpiration('1 days')
+      expiresIn: '2 days',
+      expiresAt: createExpiration.makeExpiration('2 days'),
+      is_protected: true
     });
 
     await request(app.instance).get(`/api/private/${id}`).expect(200);
@@ -52,10 +53,12 @@ describe('Secret e2e', () => {
       body: 'secret body goes here',
       password: null,
       expiresIn: '1 days',
-      expiresAt: createExpiration.makeExpiration('1 days')
+      expiresAt: createExpiration.makeExpiration('1 days'),
+      is_protected: true
     });
     const response = await getSecret(id);
-    if (response.password) {
+
+    if (response.is_protected) {
       const { body } = await request(app.instance)
         .post(`/api/secret/${id}`)
         .send({ password: 'secret' })
@@ -63,14 +66,15 @@ describe('Secret e2e', () => {
       expect(body).toEqual(
         expect.objectContaining({ secret: 'secret body goes here' })
       );
+    } else {
+      const { body } = await request(app.instance)
+        .post(`/api/secret/${id}`)
+        .send({ password: '' })
+        .expect(200);
+      expect(body).toEqual(
+        expect.objectContaining({ secret: 'secret body goes here' })
+      );
     }
-    const { body } = await request(app.instance)
-      .post(`/api/secret/${id}`)
-      .send({ password: '' })
-      .expect(200);
-    expect(body).toEqual(
-      expect.objectContaining({ secret: 'secret body goes here' })
-    );
   });
 
   afterAll(async () => {

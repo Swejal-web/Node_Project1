@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { bcryptService } from 'common/services';
 import { db } from 'database';
 
@@ -11,25 +12,18 @@ export const createSecret = async ({
   expiresIn,
   expiresAt
 }: CreateSecret) => {
-  if (password) {
-    await db('secrets').insert({
-      id,
-      body,
-      password: await bcryptService.hash(password),
-      expiresIn,
-      expires_at: expiresAt
-    });
-  } else {
-    await db('secrets').insert({
-      id,
-      body,
-      expiresIn,
-      expires_at: expiresAt
-    });
-  }
+  await db('secrets').insert({
+    id,
+    body,
+    password: password ? await bcryptService.hash(password) : null,
+    expiresIn,
+    expires_at: expiresAt,
+    is_protected: (password && true) || false
+  });
 };
 
 export const getSecret = async (id): Promise<Secret> => {
   const secrets = await db('secrets').where({ id }).first();
+
   return secrets;
 };
