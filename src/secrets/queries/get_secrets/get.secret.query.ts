@@ -10,7 +10,8 @@ export class GetSecretQuery {
       body: secrets.body,
       password: secrets.password,
       expiresIn: secrets.expiresIn,
-      expiresAt: secrets.expires_at
+      expiresAt: secrets.expires_at,
+      is_protected: secrets.is_protected
     });
   }
 }

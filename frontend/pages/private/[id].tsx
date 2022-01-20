@@ -23,7 +23,7 @@ export default function PrivateId({ id }: IProps) {
       <h2 className="container max-w-3xl bg-gray-100 rounded-md h-8 border-2 ">
         http://localhost:3001/secret/{secret.secId}
       </h2>
-      {secret.secretPassword && (
+      {secret.secretProtected && (
         <h2 className="text-gray-500 text-lg ">
           This Secret requires Password
         </h2>

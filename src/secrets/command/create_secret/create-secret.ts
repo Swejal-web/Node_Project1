@@ -9,6 +9,8 @@ export class CreateSecret {
 
   public readonly expiresAt: string;
 
+  public readonly is_protected: boolean;
+
   constructor(props: CreateSecret) {
     Object.assign(this, props);
   }

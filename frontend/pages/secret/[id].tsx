@@ -14,7 +14,7 @@ export interface iPassword {
 interface IGetSecret {
   secId: string;
   secretBody: string;
-  secretPassword: string;
+  secretProtected: boolean;
   message: string;
 }
 
@@ -50,7 +50,7 @@ export default function SecretId({ secretData }: IProps) {
     );
   }
 
-  const { secretPassword, secId } = secretData;
+  const { secretProtected, secId } = secretData;
 
   const formSubmit = async (datas: iPassword) => {
     const { passphrase } = datas;
@@ -64,7 +64,7 @@ export default function SecretId({ secretData }: IProps) {
     <>
       {secretData.message ? (
         <ErrorBox />
-      ) : secretPassword ? (
+      ) : secretProtected ? (
         <PasswordBox formSubmit={formSubmit} secret={secret} />
       ) : (
         <ViewBox mutate={mutate} secId={secId} secret={secret} />

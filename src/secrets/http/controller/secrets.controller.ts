@@ -25,15 +25,22 @@ export const postSecret = async (req: Request, res: Response, next) => {
   const command = new CreateSecret({
     id,
     body: body.body,
-    password: body.password,
+    password: body.password && (await bcryptService.hash(body.password)),
     expiresIn: body.expiresIn,
-    expiresAt: createExpiration.makeExpiration(body.expiresIn)
+    expiresAt: createExpiration.makeExpiration(body.expiresIn),
+    is_protected: (body.password && true) || false
   });
 
   await createSecretService.execute(command);
 
   const secret = await getSecret.getId(id);
-  res.status(201).json({ secret });
+  res.status(201).json({
+    secret: {
+      id: secret.id,
+      body: secret.body,
+      is_protected: secret.is_protected
+    }
+  });
 };
 
 // for fetching the secret
@@ -51,16 +58,16 @@ export const getSingleSecret = async (req: Request, res: Response, next) => {
       return res.status(200).json({
         secId: secret.id,
         secretBody: secret.body,
-        secretPassword: secret.password
+        secretProtected: secret.is_protected
       });
     }
     res.status(200).json({
       secId: secret.id,
       secretBody: 'This message is encrypted with your password',
-      secretPassword: secret.password
+      secretProtected: secret.is_protected
     });
   } catch (err) {
-    res.status(400).json({ err: 'token is not valid' });
+    res.status(400).json({ err: 'id is not valid' });
   }
 };
 
