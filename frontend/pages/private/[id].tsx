@@ -21,7 +21,7 @@ export default function PrivateId({ id }: IProps) {
     <>
       <h1 className="text-black text-2xl font-medium">Share This Link:</h1>
       <h2 className="container max-w-3xl bg-gray-100 rounded-md h-8 border-2 ">
-        http://localhost:3001/secret/{secret.secId}
+        http://localhost:3000/secret/{secret.secId}
       </h2>
       {secret.secretProtected && (
         <h2 className="text-gray-500 text-lg ">

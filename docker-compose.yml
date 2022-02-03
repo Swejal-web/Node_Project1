@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment: 
+      - POSTGRES_PASSWORD=Slipknot08
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    
+
+#   backend:
+#     container_name: node
+#     restart: unless-stopped
+#     build: .
+#     ports:
+#       - 4000:4000
+#     networks:
+#       - shared-network
+#     depends_on:
+#       - postgres
+
+#   frontend:
+#     container_name: next
+#     restart: unless-stopped
+#     build: 
+#       context: frontend
+#       dockerfile: Dockerfile
+#     ports:
+#       - 3000:3000
+#     networks:
+#       - shared-network
+#     depends_on:
+#       - backend
+# networks:
+#   shared-network:

@@ -6,7 +6,11 @@ dotenv.config({ path: './config.env' });
 exports.development = {
   client: 'postgres',
   connection: {
-    connectionString: process.env.DB_CONNECTION_STRING
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD
   },
   migrations: {
     directory: './migrations',

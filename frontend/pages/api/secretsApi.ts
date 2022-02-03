@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Isecret } from 'components/SecretForm';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000/api'
+  baseURL: 'http://localhost:4000/api'
 });
 
 export interface secretValue {
